@@ -2,6 +2,10 @@
 
 Design and implementation of a 16-bit Arithmetic Logic Unit (ALU) on a Terasic DE0-Nano SoC FPGA using VHDL.
 
+<p align="center">
+<img src="documentation/img/sys_arq_completa.png" width="700">
+</p>
+
 This repository contains the complete source code, Quartus project files, documentation, and supporting material associated with the paper:
 
 > **"Diseño e Implementación de una Unidad Aritmético-Lógica en una placa de desarrollo FPGA"**
