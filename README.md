@@ -33,23 +33,9 @@ The primary objective of this project is to demonstrate the implementation of a 
 
 ## Repository Contents
 
-### VHDL_Code
-
-Contains the complete VHDL implementation of the project, including:
-
-- ALU
-- LCD Controller
-- Complete System
-
----
-
-### Quartus_Project
-
-Contains the Quartus project ready for compilation, including:
-
-- Project files (.qpf)
-- Pin assignments (.qsf)
-- Timing constraints (if applicable)
+- `VHDL_code/` contains the modified source code used in this work.
+- `LCD_library/` contains the original LCD library developed by Jesús Eduardo Méndez Rosales.
+- `configs/` contains the Quartus project configuration and pin assignments.
 
 ---
 
@@ -76,11 +62,19 @@ https://intesc.mx/libreria-lcd/
 
 ## Compilation
 
-1. Open the Quartus project.
-2. Verify the target device is **Cyclone V 5CSEMA4U23C6**.
-3. Compile the project.
-4. Program the FPGA using the generated `.sof` file.
-5. Connect the keypad and LCD according to the paper.
+## Project Setup
+
+1. Create a new project in **Intel Quartus Prime Lite 25.1**.
+2. Select the target device:
+   **Intel (Altera) Cyclone V 5CSEMA4U23C6**
+3. Add all VHDL source files contained in the `VHDL_code` directory to the project.
+4. Set `main.vhd` as the **Top-Level Entity**.
+5. Run **Analysis & Synthesis**.
+6. Import or recreate the pin assignments using the files available in the `configs` directory or according to the paper.
+7. Verify that all I/O pins use the **3.3-V LVTTL** I/O standard.
+8. Compile the complete project (**Start Compilation**).
+9. Program the FPGA using the generated `.sof` file.
+10. Connect the keypad, LCD and potentiometer according to the paper.
 
 ---
 
