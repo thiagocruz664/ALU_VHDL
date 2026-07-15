@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: "ALU_VHDL"
+message: "If you use this project in your research or teaching, please cite it using the metadata below."
+type: software
+
+authors:
+  - family-names: Cruz
+    given-names: Thiago
+
+repository-code: "https://github.com/USUARIO/ALU_VHDL"
+
+abstract: >
+  Design and implementation of a 16-bit Arithmetic Logic Unit (ALU)
+  on a Terasic DE0-Nano SoC FPGA using VHDL. The project includes
+  the complete source code, Quartus project files, documentation,
+  and supporting material.
+
+keywords:
+  - FPGA
+  - VHDL
+  - ALU
+  - Intel Quartus Prime
+  - Cyclone V
+  - DE0-Nano SoC
+
+license: MIT
