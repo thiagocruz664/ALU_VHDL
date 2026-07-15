@@ -64,8 +64,6 @@ https://intesc.mx/libreria-lcd/
 
 ---
 
-## Compilation
-
 ## Project Setup
 
 1. Create a new project in **Intel Quartus Prime Lite 25.1**.
