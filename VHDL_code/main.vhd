@@ -160,44 +160,44 @@ begin
 						C <= "0111";
 						state <= COL1L;
 					when COL1L =>
-						if    L1='0' then digit_hexa_s <= "0001"; state <= WAIT_STATE; -- 1
-						elsif L2='0' then digit_hexa_s <= "0100"; state <= WAIT_STATE; -- 4
-						elsif L3='0' then digit_hexa_s <= "0111"; state <= WAIT_STATE; -- 7
-						elsif L4='0' then digit_hexa_s <= "1110"; state <= WAIT_STATE; -- E (*)
+						if    L(0)='0' then digit_hexa_s <= "0001"; state <= WAIT_STATE; -- 1
+						elsif L(1)='0' then digit_hexa_s <= "0100"; state <= WAIT_STATE; -- 4
+						elsif L(2)='0' then digit_hexa_s <= "0111"; state <= WAIT_STATE; -- 7
+						elsif L(3)='0' then digit_hexa_s <= "1110"; state <= WAIT_STATE; -- E (*)
 						else state <= COL2W;
 						end if;
 					when COL2W =>
 						C <= "1011";
 						state <= COL2L;
 					when COL2L =>
-						if    L1='0' then digit_hexa_s <= "0010"; state <= WAIT_STATE; -- 2
-						elsif L2='0' then digit_hexa_s <= "0101"; state <= WAIT_STATE; -- 5
-						elsif L3='0' then digit_hexa_s <= "1000"; state <= WAIT_STATE; -- 8
-						elsif L4='0' then digit_hexa_s <= "0000"; state <= WAIT_STATE; -- 0
+						if    L(0)='0' then digit_hexa_s <= "0010"; state <= WAIT_STATE; -- 2
+						elsif L(1)='0' then digit_hexa_s <= "0101"; state <= WAIT_STATE; -- 5
+						elsif L(2)='0' then digit_hexa_s <= "1000"; state <= WAIT_STATE; -- 8
+						elsif L(3)='0' then digit_hexa_s <= "0000"; state <= WAIT_STATE; -- 0
 						else state <= COL3W;
 						end if;
 					when COL3W =>
 						C <= "1101";
 						state <= COL3L;
 					when COL3L => 
-						if    L1='0' then digit_hexa_s <= "0011"; state <= WAIT_STATE; -- 3
-						elsif L2='0' then digit_hexa_s <= "0110"; state <= WAIT_STATE; -- 6
-						elsif L3='0' then digit_hexa_s <= "1001"; state <= WAIT_STATE; -- 9
-						elsif L4='0' then digit_hexa_s <= "1111"; state <= WAIT_STATE; -- F (#)
+						if    L(0)='0' then digit_hexa_s <= "0011"; state <= WAIT_STATE; -- 3
+						elsif L(1)='0' then digit_hexa_s <= "0110"; state <= WAIT_STATE; -- 6
+						elsif L(2)='0' then digit_hexa_s <= "1001"; state <= WAIT_STATE; -- 9
+						elsif L(3)='0' then digit_hexa_s <= "1111"; state <= WAIT_STATE; -- F (#)
 						else state <= COL4W;
 						end if;
 					when COL4W =>
 						C <= "1110";
 						state <= COL4L;
 					when COL4L =>
-						if    L1='0' then digit_hexa_s <= "1010"; state <= WAIT_STATE; -- A
-						elsif L2='0' then digit_hexa_s <= "1011"; state <= WAIT_STATE; -- B
-						elsif L3='0' then digit_hexa_s <= "1100"; state <= WAIT_STATE; -- C
-						elsif L4='0' then digit_hexa_s <= "1101"; state <= WAIT_STATE; -- D
+						if    L(0)='0' then digit_hexa_s <= "1010"; state <= WAIT_STATE; -- A
+						elsif L(1)='0' then digit_hexa_s <= "1011"; state <= WAIT_STATE; -- B
+						elsif L(2)='0' then digit_hexa_s <= "1100"; state <= WAIT_STATE; -- C
+						elsif L(3)='0' then digit_hexa_s <= "1101"; state <= WAIT_STATE; -- D
 						else state <= COL1W;
 						end if;
 					when WAIT_STATE =>
-						if L1='1' and L2='1' and L3='1' and L4='1' then
+						if L(0)='1' and L(1)='1' and L(2)='1' and L(3)='1' then
 							led_debug(3 downto 0) <= digit_hexa_s;
 							num_hexa <= num_hexa(11 downto 0)&digit_hexa_s;
 							state <= CONFIRM_STATE;
