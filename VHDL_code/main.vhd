@@ -4,31 +4,31 @@ use IEEE.NUMERIC_STD.ALL;
 USE WORK.COMANDOS_LCD_REVD.ALL;
 --use work.alu.all;
 
-entity LIB_LCD_INTESC_REVD is
+entity ALU_VHDL is
     GENERIC(
         FPGA_CLK : INTEGER := 50_000_000 -- 50 MHz, Debe coincidir con la frecuencia del reloj del FPGA que se use
     ); 
     PORT(CLK: IN STD_LOGIC;
     --------------- PUERTOS PARA LCD ---------------
-        VO          : OUT STD_LOGIC := '1';
-        RS          : OUT STD_LOGIC;
-        RW          : OUT STD_LOGIC;
-        ENA         : OUT STD_LOGIC;
-        DATA_LCD    : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
-        BLK         : OUT STD_LOGIC := '0';
-        BLA         : OUT STD_LOGIC := '1';
+		VO          : OUT STD_LOGIC := '1';
+		RS          : OUT STD_LOGIC;
+		RW          : OUT STD_LOGIC;
+		ENA         : OUT STD_LOGIC;
+		DATA_LCD    : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);
+		BLK         : OUT STD_LOGIC := '0';
+		BLA         : OUT STD_LOGIC := '1';
 
     --------------- PUERTOS PARA TECLADO ---------------
-    	L           : out std_logic_vector(0 to 3);
+		L           : in std_logic_vector(0 to 3);
 		C           : out std_logic_vector(0 to 3);
 		
     --------------- OTROS PUERTOS ---------------
-        led_debug   : out std_logic_vector(7 downto 0);
+		led_debug   : out std_logic_vector(7 downto 0);
 		ex_bttn     : in std_logic := '0'
     );
-end LIB_LCD_INTESC_REVD;
+end ALU_VHDL;
 
-architecture Behavioral of LIB_LCD_INTESC_REVD is
+architecture Behavioral of ALU_VHDL is
     CONSTANT NUM_INSTRUCCIONES : INTEGER := 20; 	--INDICAR EL NUMERO DE INSTRUCCIONES PARA LA LCD
 
     ------------------------------ SEÑALES PARA LCD ------------------------------
@@ -78,15 +78,15 @@ architecture Behavioral of LIB_LCD_INTESC_REVD is
     type state_type is (COL1W,COL1L,COL2W,COL2L,COL3W,COL3L,COL4W,COL4L,WAIT_STATE,CONFIRM_STATE);
 	    signal state : state_type := COL1W;
 
-	signal digit_hexa_s : std_logic_vector (3 downto 0) := (others => '0');
-	signal num_hexa : std_logic_vector(15 downto 0) := (others => '0');
+	 signal digit_hexa_s : std_logic_vector (3 downto 0) := (others => '0');
+	 signal num_hexa : std_logic_vector(15 downto 0) := (others => '0');
 
     ------------------------------ SEÑALES PARA ALU Y ASCII ------------------------------
     signal flags : std_logic_vector(2 downto 0);
-	signal alu_out     : std_logic_vector(15 downto 0);
+	 signal alu_out     : std_logic_vector(15 downto 0);
     signal acumulador : std_logic_vector(15 downto 0) := (others => '0');
 	
-	type t_num_ascii is array (0 to 3) of std_logic_vector (7 downto 0);
+	 type t_num_ascii is array (0 to 3) of std_logic_vector (7 downto 0);
 	    signal num_ascii : t_num_ascii := (others => "00110000");
 	    signal acumulador_ascii : t_num_ascii := (others => "00110000");
     
@@ -98,7 +98,10 @@ architecture Behavioral of LIB_LCD_INTESC_REVD is
             if n < 10 then return std_logic_vector(to_unsigned(n + 16#30#,8));
             else return std_logic_vector(to_unsigned(n - 10 + 16#41#,8));
             end if;
-	end function;
+	 end function;
+	 
+	 ------------------------------ OTRAS SEÑALES ------------------------------
+	 signal ex_bttn_prev : std_logic := '0';
 begin
     ------------------- COMPONENTES PARA LCD ------------------------
     u1: PROCESADOR_LCD_REVD
